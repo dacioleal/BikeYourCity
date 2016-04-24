@@ -12,6 +12,7 @@
 		F39FD97A1CCD29CE00920531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9791CCD29CE00920531 /* Assets.xcassets */; };
 		F39FD97D1CCD29CE00920531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */; };
 		F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */; };
+		F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9881CCD329A00920531 /* BSNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		F39FD97C1CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39FD97E1CCD29CE00920531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSMainViewController.swift; sourceTree = "<group>"; };
+		F39FD9881CCD329A00920531 /* BSNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				F39FD97E1CCD29CE00920531 /* Info.plist */,
 				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
 				F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */,
+				F39FD9881CCD329A00920531 /* BSNetworkManager.swift */,
 			);
 			path = BikeSeville;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			files = (
 				F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
+				F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
