@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9721CCD29CE00920531 /* AppDelegate.swift */; };
-		F39FD9751CCD29CE00920531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9741CCD29CE00920531 /* ViewController.swift */; };
 		F39FD9781CCD29CE00920531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9761CCD29CE00920531 /* Main.storyboard */; };
 		F39FD97A1CCD29CE00920531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9791CCD29CE00920531 /* Assets.xcassets */; };
 		F39FD97D1CCD29CE00920531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */; };
+		F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F39FD96F1CCD29CE00920531 /* BikeSeville.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeSeville.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39FD9721CCD29CE00920531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F39FD9741CCD29CE00920531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F39FD9771CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F39FD9791CCD29CE00920531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F39FD97C1CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39FD97E1CCD29CE00920531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSMainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +54,12 @@
 		F39FD9711CCD29CE00920531 /* BikeSeville */ = {
 			isa = PBXGroup;
 			children = (
-				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
-				F39FD9741CCD29CE00920531 /* ViewController.swift */,
-				F39FD9761CCD29CE00920531 /* Main.storyboard */,
 				F39FD9791CCD29CE00920531 /* Assets.xcassets */,
 				F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */,
+				F39FD9761CCD29CE00920531 /* Main.storyboard */,
 				F39FD97E1CCD29CE00920531 /* Info.plist */,
+				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
+				F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */,
 			);
 			path = BikeSeville;
 			sourceTree = "<group>";
@@ -96,6 +96,7 @@
 				TargetAttributes = {
 					F39FD96E1CCD29CE00920531 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 3CAF8YGZEM;
 					};
 				};
 			};
@@ -135,7 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F39FD9751CCD29CE00920531 /* ViewController.swift in Sources */,
+				F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,7 +250,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BikeSeville/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dacioleal.BikeSeville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,7 +263,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BikeSeville/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dacioleal.BikeSeville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
