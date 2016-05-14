@@ -11,8 +11,11 @@
 		F39FD9781CCD29CE00920531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9761CCD29CE00920531 /* Main.storyboard */; };
 		F39FD97A1CCD29CE00920531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9791CCD29CE00920531 /* Assets.xcassets */; };
 		F39FD97D1CCD29CE00920531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */; };
-		F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */; };
 		F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9881CCD329A00920531 /* BSNetworkManager.swift */; };
+		F3B06B7B1CE7351A00F3D471 /* BSMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */; };
+		F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */; };
+		F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7E1CE7383C00F3D471 /* CoreData.framework */; };
+		F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B801CE7393C00F3D471 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +25,11 @@
 		F39FD9791CCD29CE00920531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F39FD97C1CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39FD97E1CCD29CE00920531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSMainViewController.swift; sourceTree = "<group>"; };
 		F39FD9881CCD329A00920531 /* BSNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSNetworkManager.swift; sourceTree = "<group>"; };
+		F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSMapViewController.swift; sourceTree = "<group>"; };
+		F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F3B06B7E1CE7383C00F3D471 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F3B06B801CE7393C00F3D471 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */,
+				F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */,
+				F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +49,9 @@
 		F39FD9661CCD29CE00920531 = {
 			isa = PBXGroup;
 			children = (
+				F3B06B801CE7393C00F3D471 /* MapKit.framework */,
+				F3B06B7E1CE7383C00F3D471 /* CoreData.framework */,
+				F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */,
 				F39FD9711CCD29CE00920531 /* BikeSeville */,
 				F39FD9701CCD29CE00920531 /* Products */,
 			);
@@ -61,7 +73,7 @@
 				F39FD9761CCD29CE00920531 /* Main.storyboard */,
 				F39FD97E1CCD29CE00920531 /* Info.plist */,
 				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
-				F39FD9841CCD2CBA00920531 /* BSMainViewController.swift */,
+				F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */,
 				F39FD9881CCD329A00920531 /* BSNetworkManager.swift */,
 			);
 			path = BikeSeville;
@@ -139,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F39FD9851CCD2CBA00920531 /* BSMainViewController.swift in Sources */,
+				F3B06B7B1CE7351A00F3D471 /* BSMapViewController.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
 				F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */,
 			);
@@ -295,6 +307,7 @@
 				F39FD9831CCD29CE00920531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

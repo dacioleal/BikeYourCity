@@ -7,15 +7,27 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var locationManager: CLLocationManager = CLLocationManager()
+    var isAuthorized: Bool = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == .AuthorizedAlways || status == .AuthorizedWhenInUse {
+            isAuthorized = true
+        } else {
+            locationManager.requestAlwaysAuthorization()
+        }
+        
         return true
     }
 

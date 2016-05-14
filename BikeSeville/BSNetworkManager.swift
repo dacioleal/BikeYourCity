@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+class BSNetworkManager: NSObject {
+    
+    static let manager = BSNetworkManager()
+    
+    let queue: NSOperationQueue?
+    
+    override init() {
+        
+        queue = NSOperationQueue()
+        super.init()
+    }
+    
+}
