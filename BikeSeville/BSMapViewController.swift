@@ -13,6 +13,10 @@ import MapKit
 class BSMapViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var latitudeLabel: UILabel!
+    @IBOutlet var longitudeLabel: UILabel!
+    @IBOutlet var speedLabel: UILabel!
+    
     
     let locationManager = CLLocationManager()
     
@@ -23,7 +27,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
 
         self.title = "Map"
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = 5
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
@@ -44,5 +48,23 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let lastLocation = locations.last
+        
+        if lastLocation != nil {
+            
+            let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
+            let longitudeStr = String(format: "Long: %.8f", (lastLocation?.coordinate.longitude)!)
+            let speed = (lastLocation?.speed)! / (3600 * 1000)  // Km/h conversion
+            let speedStr = String(format: "Speed: %.8f km/h", speed)
+            
+            latitudeLabel.text = latitudeStr
+            longitudeLabel.text = longitudeStr
+            speedLabel.text = speedStr
+        }
+        
+    }
 
 }

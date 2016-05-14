@@ -21,21 +21,66 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUI-cM-O5N">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNW-Ro-KLC" userLabel="Latitude Label">
+                                <rect key="frame" x="20" y="72" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Ckz-NN-zXg"/>
+                                    <constraint firstAttribute="height" constant="21" id="o5J-Hp-qHK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlL-Xh-uj9" userLabel="Longitude Label">
+                                <rect key="frame" x="20" y="101" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gfL-mw-OGH"/>
+                                    <constraint firstAttribute="width" constant="250" id="itF-Ii-2AD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75q-Jb-bUq">
+                                <rect key="frame" x="20" y="130" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="OXb-zJ-lKY"/>
+                                    <constraint firstAttribute="width" constant="250" id="jaT-rb-vqE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PNW-Ro-KLC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="30N-4d-l90"/>
+                            <constraint firstItem="75q-Jb-bUq" firstAttribute="top" secondItem="LlL-Xh-uj9" secondAttribute="bottom" constant="8" id="5Rh-kX-tJy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YUI-cM-O5N" secondAttribute="trailing" constant="-20" id="5tx-fb-r3a"/>
                             <constraint firstItem="YUI-cM-O5N" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6eE-MN-r2O"/>
+                            <constraint firstItem="75q-Jb-bUq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AZm-Gb-zDv"/>
+                            <constraint firstItem="LlL-Xh-uj9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Kaz-jY-pvm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PNW-Ro-KLC" secondAttribute="bottom" constant="8" id="O9H-nC-M17"/>
+                            <constraint firstItem="PNW-Ro-KLC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Wq6-1S-Cv2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YUI-cM-O5N" secondAttribute="bottom" id="aYx-GO-ASw"/>
+                            <constraint firstItem="LlL-Xh-uj9" firstAttribute="top" secondItem="PNW-Ro-KLC" secondAttribute="bottom" constant="8" id="dg5-ib-aAN"/>
                             <constraint firstItem="YUI-cM-O5N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="gOg-xR-jIo"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O9H-nC-M17"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="RwA-IS-apK" userLabel="Map"/>
                     <navigationItem key="navigationItem" title="Map" id="ukL-Dy-oS7">
                         <barButtonItem key="rightBarButtonItem" title="Options" id="bND-0w-e8M"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="latitudeLabel" destination="PNW-Ro-KLC" id="0ca-Yy-GTo"/>
+                        <outlet property="longitudeLabel" destination="LlL-Xh-uj9" id="0Sn-Ac-g4A"/>
                         <outlet property="mapView" destination="YUI-cM-O5N" id="ZI0-eF-hyG"/>
+                        <outlet property="speedLabel" destination="75q-Jb-bUq" id="shM-Z0-Hkd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
