@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3779F1D1CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F171CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift */; };
+		F3779F1E1CF0D94A00F308C9 /* BSCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F181CF0D94A00F308C9 /* BSCity.swift */; };
+		F3779F1F1CF0D94A00F308C9 /* BSContract+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F191CF0D94A00F308C9 /* BSContract+CoreDataProperties.swift */; };
+		F3779F201CF0D94A00F308C9 /* BSContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F1A1CF0D94A00F308C9 /* BSContract.swift */; };
+		F3779F211CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F1B1CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift */; };
+		F3779F221CF0D94A00F308C9 /* BSStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3779F1C1CF0D94A00F308C9 /* BSStation.swift */; };
 		F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9721CCD29CE00920531 /* AppDelegate.swift */; };
 		F39FD9781CCD29CE00920531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9761CCD29CE00920531 /* Main.storyboard */; };
 		F39FD97A1CCD29CE00920531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39FD9791CCD29CE00920531 /* Assets.xcassets */; };
 		F39FD97D1CCD29CE00920531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */; };
 		F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39FD9881CCD329A00920531 /* BSNetworkManager.swift */; };
+		F3AF7FE11CF061570091529D /* BSModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3AF7FDF1CF061570091529D /* BSModel.xcdatamodeld */; };
 		F3B06B7B1CE7351A00F3D471 /* BSMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */; };
 		F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */; };
 		F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7E1CE7383C00F3D471 /* CoreData.framework */; };
@@ -19,6 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3779F171CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BSCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3779F181CF0D94A00F308C9 /* BSCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSCity.swift; sourceTree = "<group>"; };
+		F3779F191CF0D94A00F308C9 /* BSContract+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BSContract+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3779F1A1CF0D94A00F308C9 /* BSContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSContract.swift; sourceTree = "<group>"; };
+		F3779F1B1CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BSStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3779F1C1CF0D94A00F308C9 /* BSStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSStation.swift; sourceTree = "<group>"; };
 		F39FD96F1CCD29CE00920531 /* BikeSeville.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeSeville.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39FD9721CCD29CE00920531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F39FD9771CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -26,6 +39,7 @@
 		F39FD97C1CCD29CE00920531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F39FD97E1CCD29CE00920531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F39FD9881CCD329A00920531 /* BSNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSNetworkManager.swift; sourceTree = "<group>"; };
+		F3AF7FE01CF061570091529D /* BSModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BSModel.xcdatamodel; sourceTree = "<group>"; };
 		F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSMapViewController.swift; sourceTree = "<group>"; };
 		F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3B06B7E1CE7383C00F3D471 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -46,6 +60,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3779F161CF0D92C00F308C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F3779F171CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift */,
+				F3779F181CF0D94A00F308C9 /* BSCity.swift */,
+				F3779F191CF0D94A00F308C9 /* BSContract+CoreDataProperties.swift */,
+				F3779F1A1CF0D94A00F308C9 /* BSContract.swift */,
+				F3779F1B1CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift */,
+				F3779F1C1CF0D94A00F308C9 /* BSStation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		F39FD9661CCD29CE00920531 = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +95,7 @@
 		F39FD9711CCD29CE00920531 /* BikeSeville */ = {
 			isa = PBXGroup;
 			children = (
+				F3779F161CF0D92C00F308C9 /* Model */,
 				F39FD9791CCD29CE00920531 /* Assets.xcassets */,
 				F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */,
 				F39FD9761CCD29CE00920531 /* Main.storyboard */,
@@ -75,6 +103,7 @@
 				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
 				F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */,
 				F39FD9881CCD329A00920531 /* BSNetworkManager.swift */,
+				F3AF7FDF1CF061570091529D /* BSModel.xcdatamodeld */,
 			);
 			path = BikeSeville;
 			sourceTree = "<group>";
@@ -153,7 +182,14 @@
 			files = (
 				F3B06B7B1CE7351A00F3D471 /* BSMapViewController.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
+				F3779F211CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift in Sources */,
+				F3779F221CF0D94A00F308C9 /* BSStation.swift in Sources */,
+				F3AF7FE11CF061570091529D /* BSModel.xcdatamodeld in Sources */,
+				F3779F1E1CF0D94A00F308C9 /* BSCity.swift in Sources */,
+				F3779F1F1CF0D94A00F308C9 /* BSContract+CoreDataProperties.swift in Sources */,
 				F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */,
+				F3779F201CF0D94A00F308C9 /* BSContract.swift in Sources */,
+				F3779F1D1CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +346,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F3AF7FDF1CF061570091529D /* BSModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F3AF7FE01CF061570091529D /* BSModel.xcdatamodel */,
+			);
+			currentVersion = F3AF7FE01CF061570091529D /* BSModel.xcdatamodel */;
+			path = BSModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F39FD9671CCD29CE00920531 /* Project object */;
 }

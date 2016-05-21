@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 
 class BSMapViewController: UIViewController, CLLocationManagerDelegate {
@@ -21,6 +22,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     let networkManager = BSNetworkManager.manager
+    let moc = BSNetworkManager.manager.privateMOC
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +33,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+//        let contract = NSEntityDescription.insertNewObjectForEntityForName("BSContract", inManagedObjectContext: moc) as! BSContract
+//        contract.country_code = "FR"
+//        contract.commercial_name = "Velo"
+//        contract.name = "Paris"
+//        save()
         
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -57,7 +59,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             
             let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
             let longitudeStr = String(format: "Long: %.8f", (lastLocation?.coordinate.longitude)!)
-            let speed = (lastLocation?.speed)! / (3600 * 1000)  // Km/h conversion
+            let speed = (lastLocation?.speed)! * 3600 / 1000  // Km/h conversion
             let speedStr = String(format: "Speed: %.8f km/h", speed)
             
             latitudeLabel.text = latitudeStr
@@ -65,6 +67,15 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             speedLabel.text = speedStr
         }
         
+    }
+    
+    func save() {
+        
+        do {
+            try moc.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
     }
 
 }

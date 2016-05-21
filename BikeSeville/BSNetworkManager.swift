@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class BSNetworkManager: NSObject {
     
@@ -14,9 +15,46 @@ class BSNetworkManager: NSObject {
     
     let queue: NSOperationQueue?
     
+    var privateMOC: NSManagedObjectContext
+    
     override init() {
         
         queue = NSOperationQueue()
+        
+        
+        //CoreData Stack
+        
+        //Model
+        let bundle = NSBundle.mainBundle()
+        guard let modelURL = bundle.URLForResource("BSModel", withExtension: "momd") else {
+            fatalError("Error loading model from bundle")
+        }
+        
+        guard let model = NSManagedObjectModel(contentsOfURL: modelURL) else {
+            fatalError("Error initializing model from: \(modelURL)")
+        }
+        
+        //PersistentStoreCoordinator
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
+        
+        //ManagedObjectContext
+        privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateMOC.persistentStoreCoordinator = psc
+        
+        //PersistentStore
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            
+            let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            let docURL = urls[urls.endIndex-1]
+            let storeURL = docURL.URLByAppendingPathComponent("BSModel.sqlite")
+            print("\(storeURL.absoluteString)")
+            
+            do {
+                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+            } catch {
+                fatalError("Error migrating store: \(error)")
+            }
+        }
         super.init()
     }
     
