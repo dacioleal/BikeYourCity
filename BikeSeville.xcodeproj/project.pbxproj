@@ -73,6 +73,13 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		F3779F231CF0E42A00F308C9 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Operations;
+			sourceTree = "<group>";
+		};
 		F39FD9661CCD29CE00920531 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +102,7 @@
 		F39FD9711CCD29CE00920531 /* BikeSeville */ = {
 			isa = PBXGroup;
 			children = (
+				F3779F231CF0E42A00F308C9 /* Operations */,
 				F3779F161CF0D92C00F308C9 /* Model */,
 				F39FD9791CCD29CE00920531 /* Assets.xcassets */,
 				F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */,

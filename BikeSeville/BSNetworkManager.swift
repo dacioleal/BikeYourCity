@@ -21,7 +21,6 @@ class BSNetworkManager: NSObject {
         
         queue = NSOperationQueue()
         
-        
         //CoreData Stack
         
         //Model
