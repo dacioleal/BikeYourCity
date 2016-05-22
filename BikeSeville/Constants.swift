@@ -14,6 +14,7 @@ struct Constants {
     static let kAPIKey = "7565d4ffedf38e59edc3a4baa22cb28847475681"
     static let kContractSeville = "Seville"
     static let kServiceStations = "stations"
+    static let kServiceContracts = "contracts"
     static let kUserName = "dacioleal@gmail.com"
     static let kPassword = "Gti16v325"
     

@@ -39,9 +39,12 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
 //        contract.name = "Paris"
 //        save()
         
-        let operation = BSStationsForContractOperation(contract: Constants.kContractSeville)
-        networkManager.queue?.addOperation(operation)
+        let contractsOperation = BSContractInfoOperation(contract: Constants.kContractSeville)
+        networkManager.queue?.addOperation(contractsOperation)
         
+        let stationsOperation = BSStationsForContractOperation(contract: Constants.kContractSeville)
+        networkManager.queue?.addOperation(stationsOperation)
+        stationsOperation.addDependency(contractsOperation)
     }
     
     /*

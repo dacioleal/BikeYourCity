@@ -25,6 +25,7 @@
 		F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B801CE7393C00F3D471 /* MapKit.framework */; };
 		F3B20D871CF1ADFB0099EE90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20D861CF1ADFB0099EE90 /* Constants.swift */; };
 		F3B20D891CF1B93D0099EE90 /* BSStationsForContractOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */; };
+		F3B20D8B1CF225C10099EE90 /* BSContractInfoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20D8A1CF225C10099EE90 /* BSContractInfoOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F3B06B801CE7393C00F3D471 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F3B20D861CF1ADFB0099EE90 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSStationsForContractOperation.swift; sourceTree = "<group>"; };
+		F3B20D8A1CF225C10099EE90 /* BSContractInfoOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSContractInfoOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		F3779F231CF0E42A00F308C9 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F3B20D8A1CF225C10099EE90 /* BSContractInfoOperation.swift */,
 				F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */,
 			);
 			name = Operations;
@@ -198,6 +201,7 @@
 				F3B20D871CF1ADFB0099EE90 /* Constants.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
 				F3779F211CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift in Sources */,
+				F3B20D8B1CF225C10099EE90 /* BSContractInfoOperation.swift in Sources */,
 				F3779F221CF0D94A00F308C9 /* BSStation.swift in Sources */,
 				F3AF7FE11CF061570091529D /* BSModel.xcdatamodeld in Sources */,
 				F3779F1E1CF0D94A00F308C9 /* BSCity.swift in Sources */,

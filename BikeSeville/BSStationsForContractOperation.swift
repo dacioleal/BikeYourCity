@@ -42,8 +42,8 @@ class BSStationsForContractOperation: NSOperation {
                     return
                 }
                 
-                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                print("ResponseString: \(responseString)")
+                //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                //print("ResponseString: \(responseString)")
                 
                 do {
                     
