@@ -23,6 +23,8 @@
 		F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */; };
 		F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7E1CE7383C00F3D471 /* CoreData.framework */; };
 		F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B801CE7393C00F3D471 /* MapKit.framework */; };
+		F3B20D871CF1ADFB0099EE90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20D861CF1ADFB0099EE90 /* Constants.swift */; };
+		F3B20D891CF1B93D0099EE90 /* BSStationsForContractOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3B06B7E1CE7383C00F3D471 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F3B06B801CE7393C00F3D471 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F3B20D861CF1ADFB0099EE90 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSStationsForContractOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		F3779F231CF0E42A00F308C9 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F3B20D881CF1B93D0099EE90 /* BSStationsForContractOperation.swift */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 				F39FD97B1CCD29CE00920531 /* LaunchScreen.storyboard */,
 				F39FD9761CCD29CE00920531 /* Main.storyboard */,
 				F39FD97E1CCD29CE00920531 /* Info.plist */,
+				F3B20D861CF1ADFB0099EE90 /* Constants.swift */,
 				F39FD9721CCD29CE00920531 /* AppDelegate.swift */,
 				F3B06B7A1CE7351A00F3D471 /* BSMapViewController.swift */,
 				F39FD9881CCD329A00920531 /* BSNetworkManager.swift */,
@@ -189,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B06B7B1CE7351A00F3D471 /* BSMapViewController.swift in Sources */,
+				F3B20D871CF1ADFB0099EE90 /* Constants.swift in Sources */,
 				F39FD9731CCD29CE00920531 /* AppDelegate.swift in Sources */,
 				F3779F211CF0D94A00F308C9 /* BSStation+CoreDataProperties.swift in Sources */,
 				F3779F221CF0D94A00F308C9 /* BSStation.swift in Sources */,
@@ -198,6 +205,7 @@
 				F39FD9891CCD329A00920531 /* BSNetworkManager.swift in Sources */,
 				F3779F201CF0D94A00F308C9 /* BSContract.swift in Sources */,
 				F3779F1D1CF0D94A00F308C9 /* BSCity+CoreDataProperties.swift in Sources */,
+				F3B20D891CF1B93D0099EE90 /* BSStationsForContractOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
