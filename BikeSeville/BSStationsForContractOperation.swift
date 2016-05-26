@@ -13,36 +13,18 @@ import CoreData
 
 class BSStationsForContractOperation: NSOperation {
     
-    let contractName: String
-    var contract: BSContract?
+    let contract: String
     
     init(contract:String) {
         
-        self.contractName = contract
+        self.contract = contract
         super.init()
-        let moc = BSNetworkManager.manager.privateMOC
-        
-        moc.performBlockAndWait {
-            
-            let fetch = NSFetchRequest(entityName: "BSContract")
-            let predicate = NSPredicate(format: "name = %@", contract)
-            fetch.predicate = predicate
-            
-            do {
-                let results = try moc.executeFetchRequest(fetch)
-                if results.count > 0 {
-                    self.contract = results.first as? BSContract
-                }
-            } catch let error as NSError {
-                print("Error: \(error.description)")
-            }
-        }
     }
     
     override func main() {
         
         let urlPath = Constants.kURLServer.stringByAppendingString(Constants.kServiceStations)
-        let urlPathWithParams = urlPath + "?apiKey=\(Constants.kAPIKey)" + "&contract=\(contractName)"
+        let urlPathWithParams = urlPath + "?apiKey=\(Constants.kAPIKey)" + "&contract=\(contract)"
         let url = NSURL(string: urlPathWithParams)
         
         let request: NSMutableURLRequest
@@ -92,16 +74,21 @@ class BSStationsForContractOperation: NSOperation {
                                 
                                 if let numberAt = number {
                                     
-                                    let fetch = NSFetchRequest(entityName: "BSStation")
-                                    let predicate = NSPredicate(format: "number = %ld", numberAt)
-                                    fetch.predicate = predicate
+                                    let fetchStation = NSFetchRequest(entityName: "BSStation")
+                                    let predicateStation = NSPredicate(format: "number = %ld", numberAt)
+                                    fetchStation.predicate = predicateStation
+                                    
+                                    let fetchContract = NSFetchRequest(entityName: "BSContract")
+                                    let predicateContract = NSPredicate(format: "name = %@", self.contract)
+                                    fetchContract.predicate = predicateContract
+                                    
                                     let station: BSStation
                                     
                                     do {
-                                        let results = try moc.executeFetchRequest(fetch) as? [BSStation]
+                                        let resultsStation = try moc.executeFetchRequest(fetchStation) as? [BSStation]
                                         
-                                        if results?.count > 0 {
-                                            station = results!.first!
+                                        if resultsStation?.count > 0 {
+                                            station = resultsStation!.first!
                                         } else {
                                             station = NSEntityDescription.insertNewObjectForEntityForName("BSStation", inManagedObjectContext: moc) as! BSStation
                                         }
@@ -118,7 +105,13 @@ class BSStationsForContractOperation: NSOperation {
                                         station.available_bike_stands = availableBikeStands
                                         station.available_bikes = availableBikes
                                         station.last_update = lastUpdate
-                                        station.contract = self.contract
+                                        
+                                        let resultsContract = try moc.executeFetchRequest(fetchContract) as? [BSContract]
+                                        
+                                        if resultsContract?.count > 0 {
+                                            let contractObject = resultsContract!.first! as BSContract
+                                            station.setValue(contractObject, forKey: "contract")
+                                        }
                                         try moc.save()
                                         
                                     } catch let err as NSError {

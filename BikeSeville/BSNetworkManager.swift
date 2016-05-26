@@ -16,10 +16,13 @@ class BSNetworkManager: NSObject {
     let queue: NSOperationQueue?
     
     var privateMOC: NSManagedObjectContext
+    var psc: NSPersistentStoreCoordinator
+    
     
     override init() {
         
         queue = NSOperationQueue()
+        queue?.maxConcurrentOperationCount = 1
         
         //CoreData Stack
         
@@ -34,11 +37,13 @@ class BSNetworkManager: NSObject {
         }
         
         //PersistentStoreCoordinator
-        let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
+        psc = NSPersistentStoreCoordinator(managedObjectModel: model)
         
         //ManagedObjectContext
         privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         privateMOC.persistentStoreCoordinator = psc
+        
+        super.init()
         
         //PersistentStore
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -49,12 +54,12 @@ class BSNetworkManager: NSObject {
             print("\(storeURL.absoluteString)")
             
             do {
-                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+                try self.psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
             } catch {
                 fatalError("Error migrating store: \(error)")
             }
         }
-        super.init()
+        
     }
     
 }

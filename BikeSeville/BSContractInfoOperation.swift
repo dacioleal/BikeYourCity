@@ -8,7 +8,6 @@
 
 // This operation gets information of every contract in jcdecaux bike renting service
 
-
 import UIKit
 import CoreData
 

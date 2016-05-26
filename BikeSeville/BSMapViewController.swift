@@ -22,29 +22,38 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     let networkManager = BSNetworkManager.manager
-    let moc = BSNetworkManager.manager.privateMOC
+    let moc = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    var stations = [BSStation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        moc.persistentStoreCoordinator = networkManager.psc
+        
         self.title = "Map"
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.distanceFilter = 5
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-//        let contract = NSEntityDescription.insertNewObjectForEntityForName("BSContract", inManagedObjectContext: moc) as! BSContract
-//        contract.country_code = "FR"
-//        contract.commercial_name = "Velo"
-//        contract.name = "Paris"
-//        save()
-        
         let contractsOperation = BSContractInfoOperation(contract: Constants.kContractSeville)
         networkManager.queue?.addOperation(contractsOperation)
         
+        
         let stationsOperation = BSStationsForContractOperation(contract: Constants.kContractSeville)
-        networkManager.queue?.addOperation(stationsOperation)
         stationsOperation.addDependency(contractsOperation)
+        networkManager.queue?.addOperation(stationsOperation)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let delay = 1.5 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.loadStations()
+            self.displayStationsOnMap()
+        }
     }
     
     /*
@@ -61,6 +70,10 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
         let lastLocation = locations.last
         
+        let viewRegion = MKCoordinateRegionMakeWithDistance((lastLocation?.coordinate)!, 500, 500)
+        let adjustedRegion = mapView.regionThatFits(viewRegion)
+        mapView.setRegion(adjustedRegion, animated: true)
+        
         if lastLocation != nil {
             
             let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
@@ -75,13 +88,32 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    func save() {
+    func loadStations() {
+        
+        let fetch = NSFetchRequest(entityName: "BSContract")
+        let predicate = NSPredicate(format: "name = %@", Constants.kContractSeville)
+        fetch.predicate = predicate
         
         do {
-            try moc.save()
-        } catch {
-            fatalError("Failure to save context: \(error)")
+            let results = try self.moc.executeFetchRequest(fetch)
+            if results.count > 0 {
+                let contract = results.first as? BSContract
+                let contractStations = contract?.stations?.allObjects as? [BSStation]
+                if contractStations?.count > 0 {
+                    self.stations = contractStations!
+                }
+            }
+            
+        } catch let error as NSError {
+            print("Error: \(error.description)")
         }
+
+    }
+    
+    func displayStationsOnMap() {
+        
+        mapView.addAnnotations(stations)
+        print("Stations count:\(stations.count)")
     }
 
 }
