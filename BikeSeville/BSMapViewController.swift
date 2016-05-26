@@ -70,7 +70,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
         let lastLocation = locations.last
         
-        let viewRegion = MKCoordinateRegionMakeWithDistance((lastLocation?.coordinate)!, 500, 500)
+        let viewRegion = MKCoordinateRegionMakeWithDistance((lastLocation?.coordinate)!, 1000, 1000)
         let adjustedRegion = mapView.regionThatFits(viewRegion)
         mapView.setRegion(adjustedRegion, animated: true)
         
