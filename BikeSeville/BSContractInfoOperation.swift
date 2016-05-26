@@ -6,6 +6,9 @@
 //  Copyright © 2016 Dacio Leal Rodriguez. All rights reserved.
 //
 
+// This operation gets information of every contract in jcdecaux bike renting service
+
+
 import UIKit
 import CoreData
 
@@ -43,9 +46,6 @@ class BSContractInfoOperation: NSOperation {
                     print("Error: \(error?.description)")
                     return
                 }
-                
-                //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                //print("ResponseString: \(responseString)")
                 
                 do {
                     
@@ -85,21 +85,16 @@ class BSContractInfoOperation: NSOperation {
                                     }
                                     
                                     try moc.save()
-                                    
-                                    
+                        
                                 } catch let error as NSError {
                                     print("Error: \(error.description)")
                                 }
                             })
-                            
                         }
-                        
                     }
-                    
                 } catch let error as NSError {
                     print("Error: \(error.description)")
                 }
-                
             })
             task.resume()
             

@@ -16,7 +16,7 @@ extension BSStation {
 
     @NSManaged var number: NSNumber?
     @NSManaged var name: String?
-    @NSManaged var address: NSNumber?
+    @NSManaged var address: String?
     @NSManaged var banking: NSNumber?
     @NSManaged var bonus: NSNumber?
     @NSManaged var status: String?

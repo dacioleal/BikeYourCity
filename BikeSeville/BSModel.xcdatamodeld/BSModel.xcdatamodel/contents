@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
     <entity name="BSCity" representedClassName=".BSCity" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contract" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BSContract" inverseName="cities" inverseEntity="BSContract" syncable="YES"/>
@@ -12,7 +12,7 @@
         <relationship name="stations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BSStation" inverseName="contract" inverseEntity="BSStation" syncable="YES"/>
     </entity>
     <entity name="BSStation" representedClassName=".BSStation" syncable="YES">
-        <attribute name="address" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="available_bike_stands" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="available_bikes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="banking" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -27,8 +27,8 @@
         <relationship name="contract" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BSContract" inverseName="stations" inverseEntity="BSContract" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BSContract" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="BSCity" positionX="178" positionY="80" width="128" height="73"/>
+        <element name="BSContract" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="BSStation" positionX="-342" positionY="63" width="128" height="238"/>
     </elements>
 </model>
