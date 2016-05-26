@@ -61,7 +61,7 @@ class BSContractInfoOperation: NSOperation {
                             moc.performBlock({
                                 
                                 let fetch = NSFetchRequest(entityName: "BSContract")
-                                let predicate = NSPredicate(format: "name = \(name)")
+                                let predicate = NSPredicate(format: "name = %@", name!)
                                 fetch.predicate = predicate
                                 
                                 let contract: BSContract?
@@ -72,9 +72,19 @@ class BSContractInfoOperation: NSOperation {
                                     
                                     if results?.count > 0 {
                                         
-                                        //Continue here
+                                        contract = results?.first
+                                        contract?.commercial_name = commercialName
+                                        contract?.country_code = countryCode
                                         
+                                    } else {
+                                        
+                                        contract = NSEntityDescription.insertNewObjectForEntityForName("BSContract", inManagedObjectContext: moc) as? BSContract
+                                        contract?.name = name
+                                        contract?.commercial_name = commercialName
+                                        contract?.country_code = countryCode
                                     }
+                                    
+                                    try moc.save()
                                     
                                     
                                 } catch let error as NSError {
