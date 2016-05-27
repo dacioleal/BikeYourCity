@@ -30,30 +30,18 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
         moc.persistentStoreCoordinator = networkManager.psc
         
-        self.title = "Map"
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         locationManager.distanceFilter = 5
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
-        
-        let contractsOperation = BSContractInfoOperation(contract: Constants.kContractSeville)
-        networkManager.queue?.addOperation(contractsOperation)
-        
-        
-        let stationsOperation = BSStationsForContractOperation(contract: Constants.kContractSeville)
-        stationsOperation.addDependency(contractsOperation)
-        networkManager.queue?.addOperation(stationsOperation)
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let delay = 1.5 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue()) {
-            self.loadStations()
-            self.displayStationsOnMap()
-        }
+        updateStationsFromServer()
     }
     
     /*
@@ -65,6 +53,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    @IBAction func updateAction(sender: UIBarButtonItem) {
+        
+        updateStationsFromServer()
+    }
+    
+    
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -88,6 +84,29 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
+    func updateStationsFromServer() {
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        let contractsOperation = BSContractInfoOperation(contract: Constants.kContractSeville)
+        networkManager.queue?.addOperation(contractsOperation)
+        
+        let stationsOperation = BSStationsForContractOperation(contract: Constants.kContractSeville)
+        stationsOperation.addDependency(contractsOperation)
+        networkManager.queue?.addOperation(stationsOperation)
+        
+        let delay = 1.5 * Double(NSEC_PER_SEC)
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            self.loadStations()
+            self.displayStationsOnMap()
+        }
+        
+    }
+    
+    
     func loadStations() {
         
         let fetch = NSFetchRequest(entityName: "BSContract")
@@ -110,10 +129,13 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
 
     }
     
+    
     func displayStationsOnMap() {
         
-        mapView.addAnnotations(stations)
-        print("Stations count:\(stations.count)")
+        if mapView.annotations.count > 0 {
+            mapView.removeAnnotations(mapView.annotations)
+        }
+        mapView.showAnnotations(stations, animated: true)
     }
 
 }

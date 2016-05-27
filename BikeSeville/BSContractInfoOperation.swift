@@ -39,6 +39,7 @@ class BSContractInfoOperation: NSOperation {
             request.addValue(authValue, forHTTPHeaderField: "Authorization")
             request.HTTPMethod = "GET"
             
+            
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) in
                 
                 if error != nil {

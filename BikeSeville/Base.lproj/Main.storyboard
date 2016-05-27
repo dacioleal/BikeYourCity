@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ciT-EU-ywP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4Al-an-wrm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,7 +9,7 @@
         <!--BSMapViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="BSMapViewController" customClass="BSMapViewController" customModule="BikeSeville" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map" id="BYZ-38-t0r" userLabel="BSMapViewController" customClass="BSMapViewController" customModule="BikeSeville" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -72,10 +72,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="RwA-IS-apK" userLabel="Map"/>
                     <navigationItem key="navigationItem" title="Map" id="ukL-Dy-oS7">
-                        <barButtonItem key="rightBarButtonItem" title="Options" id="bND-0w-e8M"/>
+                        <barButtonItem key="leftBarButtonItem" title="Update" id="KXT-sf-R6J">
+                            <connections>
+                                <action selector="updateAction:" destination="BYZ-38-t0r" id="daz-4g-EY0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="eY7-Sx-s7D"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="latitudeLabel" destination="PNW-Ro-KLC" id="0ca-Yy-GTo"/>
                         <outlet property="longitudeLabel" destination="LlL-Xh-uj9" id="0Sn-Ac-g4A"/>
@@ -85,25 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2178" y="447"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="WNP-ko-Uc0">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciT-EU-ywP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iIL-o8-d1w">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="4Al-an-wrm" kind="relationship" relationship="rootViewController" id="su6-ZP-ZMg"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SQo-N8-DVv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="554" y="447"/>
+            <point key="canvasLocation" x="2875" y="126"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WAM-MW-DCY">
@@ -116,12 +103,31 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="1ur-7l-mhb"/>
+                        <segue destination="Fe7-oA-1Bd" kind="relationship" relationship="viewControllers" id="1ur-7l-mhb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rka-zG-wnd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1366" y="447"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="ugA-Zg-C5w">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fe7-oA-1Bd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="RwA-IS-apK" userLabel="Map"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dLu-w7-Ocv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="H1V-te-QTX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WcX-ij-qZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2144" y="126"/>
         </scene>
     </scenes>
 </document>
