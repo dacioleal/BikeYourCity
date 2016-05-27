@@ -41,6 +41,12 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        let location = CLLocation(latitude: 37.39592265, longitude: -5.98225566) //Seville Centre
+        
+        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 8000, 8000)
+        let adjustedRegion = mapView.regionThatFits(viewRegion)
+        mapView.setRegion(adjustedRegion, animated: true)
+        
         updateStationsFromServer()
     }
     
@@ -66,10 +72,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
         let lastLocation = locations.last
         
-        let viewRegion = MKCoordinateRegionMakeWithDistance((lastLocation?.coordinate)!, 1000, 1000)
-        let adjustedRegion = mapView.regionThatFits(viewRegion)
-        mapView.setRegion(adjustedRegion, animated: true)
-        
         if lastLocation != nil {
             
             let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
@@ -80,6 +82,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             latitudeLabel.text = latitudeStr
             longitudeLabel.text = longitudeStr
             speedLabel.text = speedStr
+            
+            if speed > 2.0 {
+                
+                let viewRegion = MKCoordinateRegionMakeWithDistance((lastLocation?.coordinate)!, 1000, 1000)
+                let adjustedRegion = mapView.regionThatFits(viewRegion)
+                mapView.setRegion(adjustedRegion, animated: true)
+            }
+            
         }
         
     }
@@ -96,7 +106,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         stationsOperation.addDependency(contractsOperation)
         networkManager.queue?.addOperation(stationsOperation)
         
-        let delay = 1.5 * Double(NSEC_PER_SEC)
+        let delay = 2.5 * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -136,6 +146,11 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             mapView.removeAnnotations(mapView.annotations)
         }
         mapView.showAnnotations(stations, animated: true)
+        print("Stations count:\(stations.count)")
+        print("Map annotations: \(mapView.annotations.count)")
+        
+        
+        
     }
 
 }
