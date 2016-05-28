@@ -75,14 +75,17 @@
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="ukL-Dy-oS7">
                         <leftBarButtonItems>
-                            <barButtonItem title="Item" id="KXT-sf-R6J" userLabel="Update Button Item">
+                            <barButtonItem image="update_icon.png" id="KXT-sf-R6J" userLabel="Update Button Item">
                                 <connections>
                                     <action selector="updateAction:" destination="BYZ-38-t0r" id="daz-4g-EY0"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" id="plw-Ob-ONd" userLabel="Location Button Item"/>
+                            <barButtonItem image="location_icon.png" id="plw-Ob-ONd" userLabel="Location Button Item"/>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="eY7-Sx-s7D"/>
+                        <rightBarButtonItems>
+                            <barButtonItem image="settings_icon.png" id="eY7-Sx-s7D"/>
+                            <barButtonItem image="clock_start_icon.png" id="mU0-8X-voW"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -134,4 +137,10 @@
             <point key="canvasLocation" x="2144" y="126"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clock_start_icon.png" width="32" height="32"/>
+        <image name="location_icon.png" width="32" height="32"/>
+        <image name="settings_icon.png" width="32" height="32"/>
+        <image name="update_icon.png" width="32" height="32"/>
+    </resources>
 </document>
