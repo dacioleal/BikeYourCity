@@ -16,8 +16,15 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var latitudeLabel: UILabel!
     @IBOutlet var longitudeLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
     @IBOutlet var speedLabel: UILabel!
+    @IBOutlet var kmLabel: UILabel!
+    @IBOutlet var timerView: UIView!
+    @IBOutlet var clockButton: UIBarButtonItem!
     
+    var timer: NSTimer?
+    var startTime: NSDate?
+    var counter = 1.0
     
     let locationManager = CLLocationManager()
     
@@ -34,12 +41,8 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.distanceFilter = 5
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
-    }
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        //updateStationsFromServer()
         
         let location = CLLocation(latitude: 37.39592265, longitude: -5.98225566) //Seville Centre
         
@@ -47,7 +50,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         let adjustedRegion = mapView.regionThatFits(viewRegion)
         mapView.setRegion(adjustedRegion, animated: true)
         
-        updateStationsFromServer()
+        
+    }
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     /*
@@ -66,6 +76,49 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         updateStationsFromServer()
     }
     
+    @IBAction func startClockAction(sender: UIBarButtonItem) {
+        
+        if timer?.valid == true {
+            timer?.invalidate()
+            timer = nil
+            let clockStartImage = UIImage(named: "clock_start_icon")
+            if let image = clockStartImage {
+                clockButton.image = image
+            }
+            startTime = nil;
+            counter = 1.0
+        } else {
+            
+            startTime = NSDate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BSMapViewController.timerAction), userInfo: nil, repeats: true)
+            let clockStopImage = UIImage(named: "clock_stop_icon")
+            if let image = clockStopImage {
+                clockButton.image = image
+            }
+            
+        }
+    }
+    
+    func timerAction() {
+        
+        if let date = startTime {
+            
+            let currentDate = NSDate(timeInterval: counter, sinceDate: date)
+            let difference = currentDate.timeIntervalSinceDate(date)
+            var differenceInteger = NSInteger(difference)
+            
+            let hours = differenceInteger / 3600
+            differenceInteger -= hours * 3600
+            let minutes = differenceInteger / 60
+            differenceInteger -= minutes * 60
+            let seconds = differenceInteger
+            
+            print("\(hours):\(minutes):\(seconds)")
+            timeLabel.text = "\(hours):\(minutes):\(seconds)"
+            
+            counter += 1.0
+        }
+    }
     
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -77,7 +130,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
             let longitudeStr = String(format: "Long: %.8f", (lastLocation?.coordinate.longitude)!)
             let speed = (lastLocation?.speed)! * 3600 / 1000  // Km/h conversion
-            let speedStr = String(format: "Speed: %.8f km/h", speed)
+            let speedStr = String(format: "%.2f km/h", speed)
             
             latitudeLabel.text = latitudeStr
             longitudeLabel.text = longitudeStr
