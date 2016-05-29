@@ -42,7 +42,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-        //updateStationsFromServer()
+        updateStationsFromServer()
         
         let location = CLLocation(latitude: 37.39592265, longitude: -5.98225566) //Seville Centre
         
