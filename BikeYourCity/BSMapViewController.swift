@@ -42,15 +42,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         
-        updateStationsFromServer()
+        //updateStationsFromServer()
         
         let location = CLLocation(latitude: 37.39592265, longitude: -5.98225566) //Seville Centre
         
         let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 8000, 8000)
         let adjustedRegion = mapView.regionThatFits(viewRegion)
         mapView.setRegion(adjustedRegion, animated: true)
-        
-        
+
     }
     
     
@@ -124,6 +123,28 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let lastLocation = locations.last
+        
+        
+        
+        if timer?.valid == true {
+            
+            let privateMOC = networkManager.privateMOC
+            privateMOC.performBlock {
+                let point = NSEntityDescription.insertNewObjectForEntityForName("BSPoint", inManagedObjectContext: privateMOC) as? BSPoint
+                point?.latitude = lastLocation?.coordinate.latitude
+                point?.longitude = lastLocation?.coordinate.longitude
+                point?.course = lastLocation?.course
+                point?.speed = lastLocation?.speed
+                point?.timeStamp = lastLocation?.timestamp
+                do {
+                    try privateMOC.save()
+                } catch let error as NSError {
+                    print("Error: \(error.description)")
+                }
+            }
+        }
+        
+        
         
         if lastLocation != nil {
             
@@ -199,11 +220,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             mapView.removeAnnotations(mapView.annotations)
         }
         mapView.showAnnotations(stations, animated: true)
-        print("Stations count:\(stations.count)")
-        print("Map annotations: \(mapView.annotations.count)")
-        
-        
-        
     }
 
 }
