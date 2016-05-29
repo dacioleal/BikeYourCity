@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BikeSeville.xcodeproj">
+      location = "self:/Users/dacioleal/Documents/workspace BitBucket/BikeYourCity/BikeYourCity.xcodeproj">
    </FileRef>
 </Workspace>
