@@ -10,7 +10,7 @@
         <!--BSMapViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Map" id="BYZ-38-t0r" userLabel="BSMapViewController" customClass="BSMapViewController" customModule="BikeSeville" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map" id="BYZ-38-t0r" userLabel="BSMapViewController" customClass="BSMapViewController" customModule="BikeYourCity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

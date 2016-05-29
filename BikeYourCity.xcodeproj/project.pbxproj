@@ -41,7 +41,6 @@
 		F37D102E1CFB5F5B00D40596 /* statistics_icon_filled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F37D100B1CFB5F5B00D40596 /* statistics_icon_filled@2x.png */; };
 		F37D102F1CFB5F5B00D40596 /* update_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F37D100C1CFB5F5B00D40596 /* update_icon.png */; };
 		F37D10301CFB5F5B00D40596 /* update_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F37D100D1CFB5F5B00D40596 /* update_icon@2x.png */; };
-		F37D10311CFB5F5B00D40596 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F37D100E1CFB5F5B00D40596 /* Info.plist */; };
 		F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */; };
 		F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7E1CE7383C00F3D471 /* CoreData.framework */; };
 		F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B801CE7393C00F3D471 /* MapKit.framework */; };
@@ -255,7 +254,6 @@
 				F37D10281CFB5F5B00D40596 /* map_icon_filled@2x.png in Resources */,
 				F37D10121CFB5F5B00D40596 /* Main.storyboard in Resources */,
 				F37D10101CFB5F5B00D40596 /* Assets.xcassets in Resources */,
-				F37D10311CFB5F5B00D40596 /* Info.plist in Resources */,
 				F37D10211CFB5F5B00D40596 /* clock_stop_icon.png in Resources */,
 				F37D10251CFB5F5B00D40596 /* map_icon.png in Resources */,
 				F37D10231CFB5F5B00D40596 /* location_icon.png in Resources */,
