@@ -11,7 +11,7 @@ import MapKit
 import CoreData
 
 
-class BSMapViewController: UIViewController, CLLocationManagerDelegate {
+class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var latitudeLabel: UILabel!
@@ -98,10 +98,9 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
                     print("Error: \(error.description)")
                 }
             }
-            
-            
             startTime = nil;
             counter = 1.0
+            
         } else {
             
             startTime = NSDate()
@@ -134,8 +133,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
                     print("Error: \(error.description)")
                 }
             }
-
-            
         }
     }
     
@@ -189,8 +186,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
         
-        
-        
         if lastLocation != nil {
             
             let latitudeStr = String(format: "Lat: %.8f", (lastLocation?.coordinate.latitude)!)
@@ -208,9 +203,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
                 let adjustedRegion = mapView.regionThatFits(viewRegion)
                 mapView.setRegion(adjustedRegion, animated: true)
             }
-            
         }
-        
     }
     
     //MARK: Stations related methods
@@ -256,7 +249,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         } catch let error as NSError {
             print("Error: \(error.description)")
         }
-
     }
     
     
@@ -266,6 +258,20 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             mapView.removeAnnotations(mapView.annotations)
         }
         mapView.showAnnotations(stations, animated: true)
+    }
+    
+    //MARK: MapView delegate methods
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        if overlay.isKindOfClass(MKPolyline) {
+            let polyLineRenderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+            polyLineRenderer.fillColor = UIColor.greenColor()
+            polyLineRenderer.strokeColor = UIColor.yellowColor()
+            polyLineRenderer.lineWidth = 2.0
+            return polyLineRenderer
+        }
+        return MKPolylineRenderer()
     }
 
 }
