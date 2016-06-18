@@ -24,6 +24,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     
     var timer: NSTimer?
     var startTime: NSDate?
+    var route : BSRoute?
     var counter = 1.0
     
     let locationManager = CLLocationManager()
@@ -77,6 +78,8 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func startClockAction(sender: UIBarButtonItem) {
         
+        let privateMOC = networkManager.privateMOC
+        
         if timer?.valid == true {
             timer?.invalidate()
             timer = nil
@@ -84,6 +87,19 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             if let image = clockStartImage {
                 clockButton.image = image
             }
+            
+            //Guardamos el tiempo de parada de la ruta
+            privateMOC.performBlockAndWait {
+                
+                
+                do {
+                    try privateMOC.save()
+                } catch let error as NSError {
+                    print("Error: \(error.description)")
+                }
+            }
+            
+            
             startTime = nil;
             counter = 1.0
         } else {
@@ -94,6 +110,31 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
             if let image = clockStopImage {
                 clockButton.image = image
             }
+            
+            //Creamos una nueva ruta y la guardamos
+            var routeID :NSManagedObjectID?
+            privateMOC.performBlockAndWait {
+                let route = NSEntityDescription.insertNewObjectForEntityForName("BSRoute", inManagedObjectContext: privateMOC) as? BSRoute
+                route?.startDate = self.startTime
+                do {
+                    try privateMOC.save()
+                } catch let error as NSError {
+                    print("Error: \(error.description)")
+                }
+                if let routeIn = route {
+                    routeID = routeIn.objectID
+                }
+            }
+            
+            if let routeMoID = routeID {
+                self.route = moc.objectWithID(routeMoID) as? BSRoute
+                do {
+                    try moc.save()
+                } catch let error as NSError {
+                    print("Error: \(error.description)")
+                }
+            }
+
             
         }
     }
@@ -124,8 +165,6 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
         let lastLocation = locations.last
         
-        
-        
         if timer?.valid == true {
             
             let privateMOC = networkManager.privateMOC
@@ -136,6 +175,12 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
                 point?.course = lastLocation?.course
                 point?.speed = lastLocation?.speed
                 point?.timeStamp = lastLocation?.timestamp
+                
+                if let routeIn = self.route {
+                    let route = privateMOC.objectWithID(routeIn.objectID) as! BSRoute
+                    point?.route = route
+                }
+                
                 do {
                     try privateMOC.save()
                 } catch let error as NSError {
@@ -168,6 +213,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    //MARK: Stations related methods
     
     func updateStationsFromServer() {
         

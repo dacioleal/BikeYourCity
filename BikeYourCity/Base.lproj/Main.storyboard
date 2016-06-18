@@ -145,7 +145,7 @@
         <!--Settings-->
         <scene sceneID="8Kk-iq-dAd">
             <objects>
-                <viewController id="fYh-rr-5fU" sceneMemberID="viewController">
+                <viewController title="Settings" id="fYh-rr-5fU" customClass="BSSettingsViewController" customModule="BikeYourCity" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RcA-Ey-R4Y"/>
                         <viewControllerLayoutGuide type="bottom" id="B7g-Gc-QkA"/>

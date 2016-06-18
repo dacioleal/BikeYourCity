@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3209B7E1D15B1A900B8202A /* BSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */; };
 		F37D100F1CFB5F5B00D40596 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D0FE81CFB5F5B00D40596 /* AppDelegate.swift */; };
 		F37D10101CFB5F5B00D40596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F37D0FE91CFB5F5B00D40596 /* Assets.xcassets */; };
 		F37D10111CFB5F5B00D40596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F37D0FEA1CFB5F5B00D40596 /* LaunchScreen.storyboard */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSSettingsViewController.swift; sourceTree = "<group>"; };
 		F37D0FE81CFB5F5B00D40596 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F37D0FE91CFB5F5B00D40596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F37D0FEB1CFB5F5B00D40596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				F37D0FFA1CFB5F5B00D40596 /* Constants.swift */,
 				F37D0FF31CFB5F5B00D40596 /* BSMapViewController.swift */,
 				F37D0FF61CFB5F5B00D40596 /* BSNetworkManager.swift */,
+				F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */,
 			);
 			path = BikeYourCity;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				F37D10131CFB5F5B00D40596 /* BSCity+CoreDataProperties.swift in Sources */,
 				F37D10181CFB5F5B00D40596 /* BSMapViewController.swift in Sources */,
 				F37D101D1CFB5F5B00D40596 /* BSStationsForContractOperation.swift in Sources */,
+				F3209B7E1D15B1A900B8202A /* BSSettingsViewController.swift in Sources */,
 				F37D103E1CFB6C4F00D40596 /* BSUser+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
