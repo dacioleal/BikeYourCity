@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F3209B7E1D15B1A900B8202A /* BSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */; };
+		F34C07601D25910800AE0A77 /* annotation_green_40x49.png in Resources */ = {isa = PBXBuildFile; fileRef = F34C075F1D25910800AE0A77 /* annotation_green_40x49.png */; };
 		F37D100F1CFB5F5B00D40596 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D0FE81CFB5F5B00D40596 /* AppDelegate.swift */; };
 		F37D10101CFB5F5B00D40596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F37D0FE91CFB5F5B00D40596 /* Assets.xcassets */; };
 		F37D10111CFB5F5B00D40596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F37D0FEA1CFB5F5B00D40596 /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSSettingsViewController.swift; sourceTree = "<group>"; };
+		F34C075F1D25910800AE0A77 /* annotation_green_40x49.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = annotation_green_40x49.png; sourceTree = "<group>"; };
 		F37D0FE81CFB5F5B00D40596 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F37D0FE91CFB5F5B00D40596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F37D0FEB1CFB5F5B00D40596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		F37D0FFB1CFB5F5B00D40596 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				F34C075F1D25910800AE0A77 /* annotation_green_40x49.png */,
 				F37D0FFC1CFB5F5B00D40596 /* clock_start_icon.png */,
 				F37D0FFD1CFB5F5B00D40596 /* clock_start_icon@2x.png */,
 				F37D0FFE1CFB5F5B00D40596 /* clock_stop_icon.png */,
@@ -271,6 +274,7 @@
 				F37D102D1CFB5F5B00D40596 /* statistics_icon_filled.png in Resources */,
 				F37D101F1CFB5F5B00D40596 /* clock_start_icon.png in Resources */,
 				F37D10221CFB5F5B00D40596 /* clock_stop_icon@2x.png in Resources */,
+				F34C07601D25910800AE0A77 /* annotation_green_40x49.png in Resources */,
 				F37D102E1CFB5F5B00D40596 /* statistics_icon_filled@2x.png in Resources */,
 				F37D10281CFB5F5B00D40596 /* map_icon_filled@2x.png in Resources */,
 				F37D10121CFB5F5B00D40596 /* Main.storyboard in Resources */,

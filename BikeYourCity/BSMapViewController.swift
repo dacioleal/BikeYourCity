@@ -50,6 +50,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 8000, 8000)
         let adjustedRegion = mapView.regionThatFits(viewRegion)
         mapView.setRegion(adjustedRegion, animated: true)
+        mapView.delegate = self
 
     }
     
@@ -272,6 +273,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             return polyLineRenderer
         }
         return MKPolylineRenderer()
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "annotationIdentifier")
+        annotationView.image = UIImage(named: "annotation_green_40x49")
+        annotationView.canShowCallout = true
+        return annotationView
     }
 
 }
