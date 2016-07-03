@@ -277,9 +277,17 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
+        if (annotation.coordinate.latitude == mapView.userLocation.coordinate.latitude) && (annotation.coordinate.longitude == mapView.userLocation.coordinate.longitude) {
+            return nil   //For user current location don't use custom view use default view
+        }
+        
+        let station = annotation as! BSStation
+        let numberToShow = station.available_bikes?.integerValue
+        
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "annotationIdentifier")
-        annotationView.image = UIImage(named: "annotation_green_40x49")
+        annotationView.image = BSAnnotationImage(numberToShow: numberToShow!, status:station.stationAvailabilityForBikes())
         annotationView.canShowCallout = true
+        
         return annotationView
     }
 

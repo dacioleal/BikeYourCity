@@ -59,5 +59,45 @@ class BSStation: NSManagedObject, MKAnnotation {
         }
         
     }
+    
+    func stationAvailabilityForBikes() -> StationStatus {
+        
+        let percentage : Double = (self.available_bikes?.doubleValue)! / (self.bike_stands?.doubleValue)!
+        
+        var status:StationStatus = StationStatus.StationStatusHighAvailability
+        
+        if (percentage >= 0.60) {
+            status = StationStatus.StationStatusHighAvailability
+        } else if (percentage < 0.60 && percentage >= 0.25) {
+            status = StationStatus.StationStatusMediumAvailability
+        } else if (percentage < 0.25) {
+            status = StationStatus.StationStatusLowAvailability
+        }
+        
+        if (self.available_bikes?.integerValue >= 5) {
+            status = StationStatus.StationStatusHighAvailability
+        }
+        
+        return status
+    }
+    
+    func stationAvailabilityForStands() -> StationStatus {
+        let percentage : Double = (self.available_bike_stands?.doubleValue)! / (self.bike_stands?.doubleValue)!
+        
+        var status:StationStatus = StationStatus.StationStatusHighAvailability
+        
+        if (percentage >= 0.35) {
+            status = StationStatus.StationStatusHighAvailability
+        } else if (percentage < 0.35 && percentage >= 0.20) {
+            status = StationStatus.StationStatusMediumAvailability
+        } else if (percentage < 0.20) {
+            status = StationStatus.StationStatusLowAvailability
+        }
+        
+        if (self.available_bike_stands?.integerValue >= 5) {
+            status = StationStatus.StationStatusHighAvailability
+        }
+        return status
+    }
 
 }

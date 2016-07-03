@@ -49,6 +49,8 @@
 		F37D103D1CFB6C4F00D40596 /* BSPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D10371CFB6C4F00D40596 /* BSPoint.swift */; };
 		F37D103E1CFB6C4F00D40596 /* BSUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D10381CFB6C4F00D40596 /* BSUser+CoreDataProperties.swift */; };
 		F37D103F1CFB6C4F00D40596 /* BSUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37D10391CFB6C4F00D40596 /* BSUser.swift */; };
+		F3AC24881D27B9F2008B96B1 /* BSAnnotationImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC24871D27B9F2008B96B1 /* BSAnnotationImage.swift */; };
+		F3AC248A1D27BFFB008B96B1 /* StationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC24891D27BFFB008B96B1 /* StationStatus.swift */; };
 		F3B06B7D1CE7383300F3D471 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */; };
 		F3B06B7F1CE7383C00F3D471 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B7E1CE7383C00F3D471 /* CoreData.framework */; };
 		F3B06B811CE7393C00F3D471 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3B06B801CE7393C00F3D471 /* MapKit.framework */; };
@@ -99,6 +101,8 @@
 		F37D10381CFB6C4F00D40596 /* BSUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BSUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F37D10391CFB6C4F00D40596 /* BSUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSUser.swift; sourceTree = "<group>"; };
 		F39FD96F1CCD29CE00920531 /* BikeYourCity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeYourCity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3AC24871D27B9F2008B96B1 /* BSAnnotationImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSAnnotationImage.swift; sourceTree = "<group>"; };
+		F3AC24891D27BFFB008B96B1 /* StationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationStatus.swift; sourceTree = "<group>"; };
 		F3B06B7C1CE7383300F3D471 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F3B06B7E1CE7383C00F3D471 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F3B06B801CE7393C00F3D471 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -134,6 +138,8 @@
 				F37D0FF31CFB5F5B00D40596 /* BSMapViewController.swift */,
 				F37D0FF61CFB5F5B00D40596 /* BSNetworkManager.swift */,
 				F3209B7D1D15B1A900B8202A /* BSSettingsViewController.swift */,
+				F3AC24871D27B9F2008B96B1 /* BSAnnotationImage.swift */,
+				F3AC24891D27BFFB008B96B1 /* StationStatus.swift */,
 			);
 			path = BikeYourCity;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 				F37D10191CFB5F5B00D40596 /* BSModel.xcdatamodeld in Sources */,
 				F37D103D1CFB6C4F00D40596 /* BSPoint.swift in Sources */,
 				F37D101C1CFB5F5B00D40596 /* BSStation.swift in Sources */,
+				F3AC248A1D27BFFB008B96B1 /* StationStatus.swift in Sources */,
 				F37D103F1CFB6C4F00D40596 /* BSUser.swift in Sources */,
 				F37D103B1CFB6C4F00D40596 /* BSRoute.swift in Sources */,
 				F37D10161CFB5F5B00D40596 /* BSContract.swift in Sources */,
@@ -316,6 +323,7 @@
 				F37D103A1CFB6C4F00D40596 /* BSRoute+CoreDataProperties.swift in Sources */,
 				F37D103C1CFB6C4F00D40596 /* BSPoint+CoreDataProperties.swift in Sources */,
 				F37D101A1CFB5F5B00D40596 /* BSNetworkManager.swift in Sources */,
+				F3AC24881D27B9F2008B96B1 /* BSAnnotationImage.swift in Sources */,
 				F37D10171CFB5F5B00D40596 /* BSContractInfoOperation.swift in Sources */,
 				F37D10131CFB5F5B00D40596 /* BSCity+CoreDataProperties.swift in Sources */,
 				F37D10181CFB5F5B00D40596 /* BSMapViewController.swift in Sources */,
