@@ -14,8 +14,8 @@ import CoreData
 
 extension BSRoute {
 
-    @NSManaged var startDate: NSDate?
-    @NSManaged var stopDate: NSDate?
+    @NSManaged var startDate: Date?
+    @NSManaged var stopDate: Date?
     @NSManaged var kilometers: NSNumber?
     @NSManaged var time: NSNumber?
     @NSManaged var user: NSManagedObject?

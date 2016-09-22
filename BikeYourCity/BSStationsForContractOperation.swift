@@ -11,7 +11,29 @@
 import UIKit
 import CoreData
 
-class BSStationsForContractOperation: NSOperation {
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+class BSStationsForContractOperation: Operation {
     
     let contract: String
     
@@ -23,107 +45,109 @@ class BSStationsForContractOperation: NSOperation {
     
     override func main() {
         
-        let urlPath = Constants.kURLServer.stringByAppendingString(Constants.kServiceStations)
+        let urlPath = Constants.kURLServer + Constants.kServiceStations
         let urlPathWithParams = urlPath + "?apiKey=\(Constants.kAPIKey)" + "&contract=\(contract)"
-        let url = NSURL(string: urlPathWithParams)
+        let url = URL(string: urlPathWithParams)
         
-        let request: NSMutableURLRequest
+       
         
         if let requestURL = url {
             
-            request = NSMutableURLRequest(URL: requestURL)
+            var request = URLRequest(url: requestURL)
             let authString = "\(Constants.kUserName):\(Constants.kPassword)"
-            let authData = authString.dataUsingEncoding(NSUTF8StringEncoding)
-            let base64AuthString = authData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            let authData = authString.data(using: String.Encoding.utf8)
+            let base64AuthString = authData?.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
             let authValue = "Basic \(base64AuthString)"
             request.addValue(authValue, forHTTPHeaderField: "Authorization")
-            request.HTTPMethod = "GET"
+            request.httpMethod = "GET"
             
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+
+            
+            let task:URLSessionDataTask = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 
+              
+
+
                 if error != nil {
-                    print("Error: \(error?.description)")
+                    print("Error: \(error.debugDescription)")
                     return
                 }
                 
-                //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                //print("ResponseString: \(responseString)")
-                
                 do {
                     
-                    if let jsonArray = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.AllowFragments) as? NSArray {
-                       
-                        for dict in jsonArray {
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data!, options:JSONSerialization.ReadingOptions.mutableContainers) as? [NSDictionary] {
+                        
+                    for dict in jsonArray {
+                        
+                        let number = dict["number"] as? NSNumber
+                        let name = dict["name"] as? String
+                        let address = dict["address"] as? String
+                        let position = dict["position"] as? Dictionary<String, Double>
+                        let lat = position?["lat"]
+                        let long = position?["lng"]
+                        let banking = dict["banking"] as? NSNumber
+                        let bonus = dict["bonus"] as? NSNumber
+                        let status = dict["status"] as? String
+                        let bikeStands = dict["bike_stands"] as? NSNumber
+                        let availableBikeStands = dict["available_bike_stands"] as? NSNumber
+                        let availableBikes = dict["available_bikes"] as? NSNumber
+                        let lastUpdate = dict["last_update"] as? NSNumber
+                        
+                        let moc = BSNetworkManager.manager.privateMOC
+                        moc.perform({
                             
-                            let number = dict["number"] as? Int
-                            let name = dict["name"] as? String
-                            let address = dict["address"] as? String
-                            let position = dict["position"] as? Dictionary<String, Double>
-                            let lat = position?["lat"]
-                            let long = position?["lng"]
-                            let banking = dict["banking"] as? Bool
-                            let bonus = dict["bonus"] as? Bool
-                            let status = dict["status"] as? String
-                            let bikeStands = dict["bike_stands"] as? Int
-                            let availableBikeStands = dict["available_bike_stands"] as? Int
-                            let availableBikes = dict["available_bikes"] as? Int
-                            let lastUpdate = dict["last_update"] as? Double
-                            
-                            let moc = BSNetworkManager.manager.privateMOC
-                            moc.performBlock({
+                            if let numberAt = number {
                                 
-                                if let numberAt = number {
+                                let fetchStation = NSFetchRequest<BSStation>(entityName: "BSStation")
+                                let predicateStation = NSPredicate(format: "number = %ld", numberAt)
+                                fetchStation.predicate = predicateStation
+                                
+                                let fetchContract = NSFetchRequest<BSContract>(entityName: "BSContract")
+                                let predicateContract = NSPredicate(format: "name = %@", self.contract)
+                                fetchContract.predicate = predicateContract
+                                
+                                let station: BSStation
+                                
+                                do {
+                                    let resultsStation = try moc.fetch(fetchStation)
                                     
-                                    let fetchStation = NSFetchRequest(entityName: "BSStation")
-                                    let predicateStation = NSPredicate(format: "number = %ld", numberAt)
-                                    fetchStation.predicate = predicateStation
-                                    
-                                    let fetchContract = NSFetchRequest(entityName: "BSContract")
-                                    let predicateContract = NSPredicate(format: "name = %@", self.contract)
-                                    fetchContract.predicate = predicateContract
-                                    
-                                    let station: BSStation
-                                    
-                                    do {
-                                        let resultsStation = try moc.executeFetchRequest(fetchStation) as? [BSStation]
-                                        
-                                        if resultsStation?.count > 0 {
-                                            station = resultsStation!.first!
-                                        } else {
-                                            station = NSEntityDescription.insertNewObjectForEntityForName("BSStation", inManagedObjectContext: moc) as! BSStation
-                                        }
-                                        
-                                        station.number = number
-                                        station.name = name
-                                        station.address = address
-                                        station.position_lat = lat
-                                        station.position_long = long
-                                        station.banking = banking
-                                        station.bonus = bonus
-                                        station.status = status
-                                        station.bike_stands = bikeStands
-                                        station.available_bike_stands = availableBikeStands
-                                        station.available_bikes = availableBikes
-                                        station.last_update = lastUpdate
-                                        
-                                        let resultsContract = try moc.executeFetchRequest(fetchContract) as? [BSContract]
-                                        
-                                        if resultsContract?.count > 0 {
-                                            let contractObject = resultsContract!.first! as BSContract
-                                            station.setValue(contractObject, forKey: "contract")
-                                        }
-                                        try moc.save()
-                                        
-                                    } catch let err as NSError {
-                                        print("Error: \(err.description)")
+                                    if resultsStation.count > 0 {
+                                        station = resultsStation.first!
+                                    } else {
+                                        station = NSEntityDescription.insertNewObject(forEntityName: "BSStation", into: moc) as! BSStation
                                     }
+                                    
+                                    station.number = number
+                                    station.name = name
+                                    station.address = address
+                                    station.position_lat = NSNumber(value: lat!)
+                                    station.position_long = NSNumber(value: long!)
+                                    station.banking = banking
+                                    station.bonus = bonus
+                                    station.status = status
+                                    station.bike_stands = bikeStands
+                                    station.available_bike_stands = availableBikeStands
+                                    station.available_bikes = availableBikes
+                                    station.last_update = lastUpdate
+                                    
+                                    let resultsContract = try moc.fetch(fetchContract)
+                                    
+                                    if resultsContract.count > 0 {
+                                        let contractObject = resultsContract.first! as BSContract
+                                        station.setValue(contractObject, forKey: "contract")
+                                    }
+                                    try moc.save()
+                                    
+                                } catch  {
+                                    print("Error: \(error)")
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
-                    
-                } catch let error as NSError {
-                    print("Error: \(error.description)")
+
+                    }
+                } catch  {
+                    print("Error: \(error)")
                 }
                 
             })

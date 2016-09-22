@@ -18,7 +18,7 @@ extension BSPoint {
     @NSManaged var longitude: NSNumber?
     @NSManaged var speed: NSNumber?
     @NSManaged var course: NSNumber?
-    @NSManaged var timeStamp: NSDate?
+    @NSManaged var timeStamp: Date?
     @NSManaged var route: BSRoute?
 
 }

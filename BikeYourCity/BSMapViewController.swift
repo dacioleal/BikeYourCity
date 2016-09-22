@@ -9,6 +9,26 @@
 import UIKit
 import MapKit
 import CoreData
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -22,15 +42,15 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     @IBOutlet var timerView: UIView!
     @IBOutlet var clockButton: UIBarButtonItem!
     
-    var timer: NSTimer?
-    var startTime: NSDate?
+    var timer: Timer?
+    var startTime: Date?
     var route : BSRoute?
     var counter = 1.0
     
     let locationManager = CLLocationManager()
     
     let networkManager = BSNetworkManager.manager
-    let moc = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     var stations = [BSStation]()
     
     override func viewDidLoad() {
@@ -56,7 +76,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
@@ -72,16 +92,16 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     */
     
     
-    @IBAction func updateAction(sender: UIBarButtonItem) {
+    @IBAction func updateAction(_ sender: UIBarButtonItem) {
         
         updateStationsFromServer()
     }
     
-    @IBAction func startClockAction(sender: UIBarButtonItem) {
+    @IBAction func startClockAction(_ sender: UIBarButtonItem) {
         
         let privateMOC = networkManager.privateMOC
         
-        if timer?.valid == true {
+        if timer?.isValid == true {
             timer?.invalidate()
             timer = nil
             let clockStartImage = UIImage(named: "clock_start_icon")
@@ -90,7 +110,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             }
             
             //Guardamos el tiempo de parada de la ruta
-            privateMOC.performBlockAndWait {
+            privateMOC.performAndWait {
                 
                 
                 do {
@@ -104,8 +124,8 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             
         } else {
             
-            startTime = NSDate()
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(BSMapViewController.timerAction), userInfo: nil, repeats: true)
+            startTime = Date()
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(BSMapViewController.timerAction), userInfo: nil, repeats: true)
             let clockStopImage = UIImage(named: "clock_stop_icon")
             if let image = clockStopImage {
                 clockButton.image = image
@@ -113,8 +133,8 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             
             //Creamos una nueva ruta y la guardamos
             var routeID :NSManagedObjectID?
-            privateMOC.performBlockAndWait {
-                let route = NSEntityDescription.insertNewObjectForEntityForName("BSRoute", inManagedObjectContext: privateMOC) as? BSRoute
+            privateMOC.performAndWait {
+                let route = NSEntityDescription.insertNewObject(forEntityName: "BSRoute", into: privateMOC) as? BSRoute
                 route?.startDate = self.startTime
                 do {
                     try privateMOC.save()
@@ -127,7 +147,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
             }
             
             if let routeMoID = routeID {
-                self.route = moc.objectWithID(routeMoID) as? BSRoute
+                self.route = moc.object(with: routeMoID) as? BSRoute
                 do {
                     try moc.save()
                 } catch let error as NSError {
@@ -141,8 +161,8 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         
         if let date = startTime {
             
-            let currentDate = NSDate(timeInterval: counter, sinceDate: date)
-            let difference = currentDate.timeIntervalSinceDate(date)
+            let currentDate = Date(timeInterval: counter, since: date)
+            let difference = currentDate.timeIntervalSince(date)
             var differenceInteger = NSInteger(difference)
             
             let hours = differenceInteger / 3600
@@ -159,23 +179,23 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     }
     
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let lastLocation = locations.last
         
-        if timer?.valid == true {
+        if timer?.isValid == true {
             
             let privateMOC = networkManager.privateMOC
-            privateMOC.performBlock {
-                let point = NSEntityDescription.insertNewObjectForEntityForName("BSPoint", inManagedObjectContext: privateMOC) as? BSPoint
-                point?.latitude = lastLocation?.coordinate.latitude
-                point?.longitude = lastLocation?.coordinate.longitude
-                point?.course = lastLocation?.course
-                point?.speed = lastLocation?.speed
+            privateMOC.perform {
+                let point = NSEntityDescription.insertNewObject(forEntityName: "BSPoint", into: privateMOC) as? BSPoint
+                point?.latitude = lastLocation?.coordinate.latitude as NSNumber?
+                point?.longitude = lastLocation?.coordinate.longitude as NSNumber?
+                point?.course = lastLocation?.course as NSNumber?
+                point?.speed = lastLocation?.speed as NSNumber?
                 point?.timeStamp = lastLocation?.timestamp
                 
                 if let routeIn = self.route {
-                    let route = privateMOC.objectWithID(routeIn.objectID) as! BSRoute
+                    let route = privateMOC.object(with: routeIn.objectID) as! BSRoute
                     point?.route = route
                 }
                 
@@ -211,7 +231,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     func updateStationsFromServer() {
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let contractsOperation = BSContractInfoOperation(contract: Constants.kContractSeville)
         networkManager.queue?.addOperation(contractsOperation)
@@ -221,9 +241,9 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         networkManager.queue?.addOperation(stationsOperation)
         
         let delay = 2.5 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue()) {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time) {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.loadStations()
             self.displayStationsOnMap()
         }
@@ -233,14 +253,14 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     func loadStations() {
         
-        let fetch = NSFetchRequest(entityName: "BSContract")
+        let fetch = NSFetchRequest<BSContract>(entityName: "BSContract")
         let predicate = NSPredicate(format: "name = %@", Constants.kContractSeville)
         fetch.predicate = predicate
         
         do {
-            let results = try self.moc.executeFetchRequest(fetch)
+            let results = try self.moc.fetch(fetch)
             if results.count > 0 {
-                let contract = results.first as? BSContract
+                let contract:BSContract? = results.first 
                 let contractStations = contract?.stations?.allObjects as? [BSStation]
                 if contractStations?.count > 0 {
                     self.stations = contractStations!
@@ -263,26 +283,26 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     
     //MARK: MapView delegate methods
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if overlay.isKindOfClass(MKPolyline) {
+        if overlay.isKind(of: MKPolyline.self) {
             let polyLineRenderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-            polyLineRenderer.fillColor = UIColor.greenColor()
-            polyLineRenderer.strokeColor = UIColor.yellowColor()
+            polyLineRenderer.fillColor = UIColor.green
+            polyLineRenderer.strokeColor = UIColor.yellow
             polyLineRenderer.lineWidth = 2.0
             return polyLineRenderer
         }
         return MKPolylineRenderer()
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if (annotation.coordinate.latitude == mapView.userLocation.coordinate.latitude) && (annotation.coordinate.longitude == mapView.userLocation.coordinate.longitude) {
             return nil   //For user current location don't use custom view use default view
         }
         
         let station = annotation as! BSStation
-        let numberToShow = station.available_bikes?.integerValue
+        let numberToShow = station.available_bikes?.intValue
         
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "annotationIdentifier")
         annotationView.image = BSAnnotationImage(numberToShow: numberToShow!, status:station.stationAvailabilityForBikes())

@@ -13,7 +13,7 @@ class BSNetworkManager: NSObject {
     
     static let manager = BSNetworkManager()
     
-    let queue: NSOperationQueue?
+    let queue: OperationQueue?
     
     var privateMOC: NSManagedObjectContext
     var psc: NSPersistentStoreCoordinator
@@ -21,18 +21,18 @@ class BSNetworkManager: NSObject {
     
     override init() {
         
-        queue = NSOperationQueue()
+        queue = OperationQueue()
         queue?.maxConcurrentOperationCount = 1
         
         //CoreData Stack
         
         //Model
-        let bundle = NSBundle.mainBundle()
-        guard let modelURL = bundle.URLForResource("BSModel", withExtension: "momd") else {
+        let bundle = Bundle.main
+        guard let modelURL = bundle.url(forResource: "BSModel", withExtension: "momd") else {
             fatalError("Error loading model from bundle")
         }
         
-        guard let model = NSManagedObjectModel(contentsOfURL: modelURL) else {
+        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
             fatalError("Error initializing model from: \(modelURL)")
         }
         
@@ -40,21 +40,21 @@ class BSNetworkManager: NSObject {
         psc = NSPersistentStoreCoordinator(managedObjectModel: model)
         
         //ManagedObjectContext
-        privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         privateMOC.persistentStoreCoordinator = psc
         
         super.init()
         
         //PersistentStore
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background).async {
             
-            let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex-1]
-            let storeURL = docURL.URLByAppendingPathComponent("BSModel.sqlite")
+            let storeURL = docURL.appendingPathComponent("BSModel.sqlite")
             print("\(storeURL.absoluteString)")
             
             do {
-                try self.psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+                try self.psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
             } catch {
                 fatalError("Error migrating store: \(error)")
             }

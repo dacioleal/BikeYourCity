@@ -9,5 +9,5 @@
 import Foundation
 
 enum StationStatus {
-    case StationStatusLowAvailability, StationStatusMediumAvailability, StationStatusHighAvailability
+    case stationStatusLowAvailability, stationStatusMediumAvailability, stationStatusHighAvailability
 }

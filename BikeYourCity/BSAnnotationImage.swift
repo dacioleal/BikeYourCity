@@ -14,13 +14,13 @@ class BSAnnotationImage: UIImage {
     let availabilityColor = false
     
     convenience init(numberToShow:Int, status:StationStatus) {
-        let path = NSBundle.mainBundle().pathForResource("annotation_green_40x49", ofType: "png")
+        let path = Bundle.main.path(forResource: "annotation_green_40x49", ofType: "png")
         
         var img = UIImage(contentsOfFile: path!)
         if let pathStr = path {
             
             let image = UIImage(contentsOfFile: pathStr)
-            let cgImage = image?.CGImage
+            let cgImage = image?.cgImage
 //            print("Width: \(CGImageGetWidth(cgImage))")
 //            print("Height: \(CGImageGetHeight(cgImage))")
             
@@ -34,21 +34,21 @@ class BSAnnotationImage: UIImage {
             var color : UIColor
             
             switch status {
-            case .StationStatusLowAvailability:
+            case .stationStatusLowAvailability:
                 color = ColorConstants.kLowAvailabilityColor
-            case .StationStatusMediumAvailability:
+            case .stationStatusMediumAvailability:
                 color = ColorConstants.kMediumAvailabilityColor
-            case .StationStatusHighAvailability:
+            case .stationStatusHighAvailability:
                 color = ColorConstants.kHighAvailabilityColor
             }
             
-            let attributes = [NSFontAttributeName:UIFont(name:"HelveticaNeue", size: 20.0)!, NSForegroundColorAttributeName:color]
-            string.drawWithRect(CGRectMake(20.0, 20.0, 20.0, 20.0), options: .UsesFontLeading, attributes: attributes, context: nil)
+            let attributes = [NSFontAttributeName:UIFont(name:"HelveticaNeue", size: 20.0)!, NSForegroundColorAttributeName:color] as [String : Any]
+            string.draw(with: CGRect(x: 20.0, y: 20.0, width: 20.0, height: 20.0), options: .usesFontLeading, attributes: attributes, context: nil)
             img = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
         }
-        self.init(CGImage: img!.CGImage!)
+        self.init(cgImage: img!.cgImage!)
         
         //self.integerToShow = integer
     }

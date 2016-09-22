@@ -9,6 +9,17 @@
 import Foundation
 import CoreData
 import MapKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 
 
@@ -19,8 +30,8 @@ class BSRoute: NSManagedObject {
     
     func polyLineRoute() -> MKPolyline? {
         
-        let points = self.points?.allObjects.sort({ (first, second) -> Bool in
-            if first.isKindOfClass(BSPoint) && second.isKindOfClass(BSPoint) {
+        let points = self.points?.allObjects.sorted(by: { (first, second) -> Bool in
+            if (first as AnyObject).isKind(of: BSPoint.self) && (second as AnyObject).isKind(of: BSPoint.self) {
                 let firstPoint = first as! BSPoint
                 let secondPoint = second as! BSPoint
                 return firstPoint.timeStamp?.timeIntervalSince1970 < secondPoint.timeStamp?.timeIntervalSince1970

@@ -11,7 +11,29 @@
 import UIKit
 import CoreData
 
-class BSContractInfoOperation: NSOperation {
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+class BSContractInfoOperation: Operation {
     
     
     let contract: String
@@ -23,33 +45,32 @@ class BSContractInfoOperation: NSOperation {
     
     override func main() {
         
-        let urlPath = Constants.kURLServer.stringByAppendingString(Constants.kServiceContracts)
+        let urlPath = Constants.kURLServer + Constants.kServiceContracts
         let urlPathWithParams = urlPath + "?apiKey=\(Constants.kAPIKey)"
-        let url = NSURL(string: urlPathWithParams)
+        let url = URL(string: urlPathWithParams)
         
-        let request: NSMutableURLRequest
         
         if let requestURL = url {
             
-            request = NSMutableURLRequest(URL: requestURL)
+            var request = URLRequest(url: requestURL)
             let authString = "\(Constants.kUserName):\(Constants.kPassword)"
-            let authData = authString.dataUsingEncoding(NSUTF8StringEncoding)
-            let base64AuthString = authData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+            let authData = authString.data(using: String.Encoding.utf8)
+            let base64AuthString = authData?.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
             let authValue = "Basic \(base64AuthString)"
             request.addValue(authValue, forHTTPHeaderField: "Authorization")
-            request.HTTPMethod = "GET"
+            request.httpMethod = "GET"
             
-            
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 
                 if error != nil {
-                    print("Error: \(error?.description)")
+                    print("Error: \(error.debugDescription)")
                     return
                 }
                 
                 do {
                     
-                    if let jsonArray = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.AllowFragments) as? NSArray {
+                    if let jsonArray = try JSONSerialization.jsonObject(with: data!, options:JSONSerialization.ReadingOptions.allowFragments) as? [NSDictionary] {
                         
                         for dict in jsonArray {
                             
@@ -58,9 +79,9 @@ class BSContractInfoOperation: NSOperation {
                             let countryCode = dict["country_code"] as? String
                             
                             let moc = BSNetworkManager.manager.privateMOC
-                            moc.performBlock({
+                            moc.perform({
                                 
-                                let fetch = NSFetchRequest(entityName: "BSContract")
+                                let fetch = NSFetchRequest<BSContract>(entityName: "BSContract")
                                 let predicate = NSPredicate(format: "name = %@", name!)
                                 fetch.predicate = predicate
                                 
@@ -68,17 +89,17 @@ class BSContractInfoOperation: NSOperation {
                                 
                                 do {
                                     
-                                    let results = try moc.executeFetchRequest(fetch) as? [BSContract]
+                                    let results = try moc.fetch(fetch)
                                     
-                                    if results?.count > 0 {
+                                    if results.count > 0 {
                                         
-                                        contract = results?.first
+                                        contract = results.first
                                         contract?.commercial_name = commercialName
                                         contract?.country_code = countryCode
                                         
                                     } else {
                                         
-                                        contract = NSEntityDescription.insertNewObjectForEntityForName("BSContract", inManagedObjectContext: moc) as? BSContract
+                                        contract = NSEntityDescription.insertNewObject(forEntityName: "BSContract", into: moc) as? BSContract
                                         contract?.name = name
                                         contract?.commercial_name = commercialName
                                         contract?.country_code = countryCode
@@ -86,20 +107,20 @@ class BSContractInfoOperation: NSOperation {
                                     
                                     try moc.save()
                         
-                                } catch let error as NSError {
-                                    print("Error: \(error.description)")
+                                } catch {
+                                    print("Error: \(error)")
                                 }
                             })
                         }
                     }
-                } catch let error as NSError {
-                    print("Error: \(error.description)")
+                } catch {
+                    print("Error: \(error)")
                 }
             })
             task.resume()
             
         } else {
-            return
+             return
         }
     }
 }

@@ -8,22 +8,42 @@
 
 import UIKit
 import CoreData
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class BSSettingsViewController: UIViewController {
     
     
     let networkManager = BSNetworkManager.manager
-    let moc = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         moc.persistentStoreCoordinator = networkManager.psc
         
-        let fetch = NSFetchRequest(entityName: "BSRoute")
+        let fetch:NSFetchRequest = NSFetchRequest<BSRoute>(entityName: "BSRoute")
         do {
             
-            let routes = try moc.executeFetchRequest(fetch) as? [BSRoute]
+            let routes:[BSRoute]? = try moc.fetch(fetch)
             
             if routes?.count > 0 {
                 
