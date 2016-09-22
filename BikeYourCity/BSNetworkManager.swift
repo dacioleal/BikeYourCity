@@ -46,7 +46,7 @@ class BSNetworkManager: NSObject {
         super.init()
         
         //PersistentStore
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.background).async {
+        DispatchQueue.global(qos: .background).async {
             
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let docURL = urls[urls.endIndex-1]
