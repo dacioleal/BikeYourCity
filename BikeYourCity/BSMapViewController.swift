@@ -79,6 +79,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateStationsFromServer()
     }
     
     /*
@@ -294,7 +295,7 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         }
         return MKPolylineRenderer()
     }
-    
+    /*
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         if (annotation.coordinate.latitude == mapView.userLocation.coordinate.latitude) && (annotation.coordinate.longitude == mapView.userLocation.coordinate.longitude) {
@@ -305,10 +306,10 @@ class BSMapViewController: UIViewController, CLLocationManagerDelegate, MKMapVie
         let numberToShow = station.available_bikes?.intValue
         
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "annotationIdentifier")
-        annotationView.image = BSAnnotationImage(numberToShow: numberToShow!, status:station.stationAvailabilityForBikes())
+        //annotationView.image = BSAnnotationImage(numberToShow: numberToShow!, status:station.stationAvailabilityForBikes())
         annotationView.canShowCallout = true
         
         return annotationView
     }
-
+        */
 }
