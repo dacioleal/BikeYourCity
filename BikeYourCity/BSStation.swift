@@ -72,8 +72,14 @@ class BSStation: NSManagedObject, MKAnnotation {
             if let stands = self.available_bike_stands?.intValue {
                 subtitle = subtitle + " Stands:\(stands)"
             }
-            if let total = self.bike_stands?.intValue {
-                subtitle = subtitle + " Total:\(total)"
+//            if let total = self.bike_stands?.intValue {
+//                subtitle = subtitle + " Total:\(total)"
+//            }
+            if let last_update = self.last_update?.doubleValue {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .long
+                let dateString = dateFormatter.string(from: Date(timeIntervalSince1970:last_update/1000))
+                subtitle = subtitle + " Updated:\(dateString)"
             }
             return subtitle
         }
